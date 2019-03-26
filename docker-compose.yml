@@ -1,0 +1,34 @@
+version: "3"
+services:
+  telegraf:
+    image: telegraf:1.10-alpine
+    depends_on:
+      - influxdb
+    ports:
+      - "127.0.0.1:8092:8092/udp"
+      - "127.0.0.1:8094:8094/tcp"
+    volumes:
+      - ./config/telegraf.conf:/etc/telegraf/telegraf.conf
+
+  influxdb:
+    image: influxdb:1.7-alpine
+    command: influxd -config /etc/influxdb/influxdb.conf
+    ports:
+      - "127.0.0.1:8086:8086/tcp"
+    volumes:
+      - ./config/influxdb.conf:/etc/influxdb/influxdb.conf
+
+  chronograf:
+    image: chronograf:1.7-alpine
+    command: chronograf --influxdb-url=http://influxdb:8086
+    depends_on:
+      - influxdb
+    ports:
+      - "127.0.0.1:8888:8888/tcp"
+
+  kapacitor:
+    image: kapacitor:1.5-alpine
+    depends_on:
+      - influxdb
+    volumes:
+      - ./config/kapacitor.conf:/etc/kapacitor/kapacitor.conf
