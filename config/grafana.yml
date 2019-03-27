@@ -1,0 +1,20 @@
+apiVersion: 1
+
+datasources:
+  - name: influxdb
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    isDefault: true
+
+  - name: builtin_metrics
+    type: influxdb
+    access: proxy
+    database: builtin_metrics
+    url: http://influxdb:8086
+
+  - name: custom_metrics
+    type: influxdb
+    access: proxy
+    database: custom_metrics
+    url: http://influxdb:8086

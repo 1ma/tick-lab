@@ -32,3 +32,10 @@ services:
       - influxdb
     volumes:
       - ./config/kapacitor.conf:/etc/kapacitor/kapacitor.conf
+
+  grafana:
+    image: grafana/grafana:6.0.2
+    ports:
+      - "127.0.0.1:3000:3000/tcp"
+    volumes:
+      - ./config/grafana.yml:/etc/grafana/provisioning/datasources/grafana.yml
