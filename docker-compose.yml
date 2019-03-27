@@ -35,6 +35,8 @@ services:
 
   grafana:
     image: grafana/grafana:6.0.2
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-worldmap-panel
     ports:
       - "127.0.0.1:3000:3000/tcp"
     volumes:
