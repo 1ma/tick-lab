@@ -34,7 +34,7 @@ services:
       - ./config/kapacitor.conf:/etc/kapacitor/kapacitor.conf
 
   grafana:
-    image: grafana/grafana:6.0.2
+    image: grafana/grafana:6.1.4
     environment:
       - GF_INSTALL_PLUGINS=grafana-worldmap-panel
     ports:
